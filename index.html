@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Генерируем randomValue один раз при загрузке страницы
+            const randomValue = Math.random().toString(36).substring(2, 15);
+
+            $('.sqs-add-to-cart-button-inner').on('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                initNewForm();
+            });
+
+            function initNewForm() {
+                if ($('#dynamicPopup').length === 0) {
+                    $('body').append(`
+                <div class="modal fade" id="dynamicPopup" tabindex="-1" role="dialog" aria-labelledby="dynamicPopupLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="dynamicPopupLabel">Step 1</h5>
+                                <button type="button" class="close" id="closePopup" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="stepForm">
+                                    <div id="step1">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                    </div>
+                                    <div id="step2" style="display:none;">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                    <div id="step3" style="display:none;">
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea class="form-control" id="description" required></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="nextStep">Next Step</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+                }
+
+                $('#dynamicPopup').css('display', 'block').addClass('show');
+
+                // Обработка закрытия попапа
+                $(document).on('click', '#closePopup', function() {
+                    $('#dynamicPopup').removeClass('show').css('display', 'none'); // Скрыть попап
+                });
+
+                // Переход на шаги
+                let currentStep = 1;
+                let name = '';
+                let email = '';
+                let description = '';
+
+                $(document).on('click', '#nextStep', function() {
+                    if (currentStep === 1) {
+                        name = $('#name').val();
+                        if (name) {
+                            // Отправка данных первого шага
+                            $.ajax({
+                                type: 'POST',
+                                url: 'https://mgr8cnbvn9.execute-api.us-east-1.amazonaws.com/dev',
+                                data: JSON.stringify({ name: name, randomValue: randomValue, email: email, description: description, step: 'Step 1' }),
+                                contentType: 'application/json'
+                            });
+                            currentStep++;
+                            $('#step1').hide();
+                            $('#step2').show();
+                            $('#dynamicPopupLabel').text('Step 2');
+                        } else {
+                            alert('Please fill out all fields.');
+                        }
+                    } else if (currentStep === 2) {
+                        email = $('#email').val();
+                        if (email) {
+                            // Отправка данных второго шага
+                            $.ajax({
+                                type: 'POST',
+                                url: 'https://mgr8cnbvn9.execute-api.us-east-1.amazonaws.com/dev',
+                                data: JSON.stringify({ name: name, randomValue: randomValue, email: email, description: description, step: 'Step 2' }),
+                                contentType: 'application/json'
+                            });
+                            currentStep++;
+                            $('#step2').hide();
+                            $('#step3').show();
+                            $('#dynamicPopupLabel').text('Step 3');
+                        } else {
+                            alert('Please fill out all fields.');
+                        }
+                    } else if (currentStep === 3) {
+                        description = $('#description').val();
+                        if (description) {
+                            // Отправка данных третьего шага
+                            $.ajax({
+                                type: 'POST',
+                                url: 'https://mgr8cnbvn9.execute-api.us-east-1.amazonaws.com/dev',
+                                data: JSON.stringify({ name: name, randomValue: randomValue, email: email, description: description, step: 'Step 3' }),
+                                contentType: 'application/json'
+                            });
+                            alert('Form submitted successfully!');
+                            currentStep = 1;
+                            $('#dynamicPopup').remove(); // Удаляем попап после отправки
+                            //$('#dynamicPopup').removeClass('show').css('display', 'none');
+                        } else {
+                            alert('Please fill out all fields.');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+<!-- Button to open the popup -->
+<div class="sqs-add-to-cart-button-wrapper" data-animation-role="button">
+    <div class="sqs-add-to-cart-button sqs-suppress-edit-mode sqs-editable-button sqs-button-element--primary use-form" role="button" tabindex="0" data-dynamic-strings data-collection-id="566abf4a0ab3773545ed6b89" data-item-id="66be2debc8c84b57294ae173" data-product-type="3" data-use-custom-label="true" data-original-label="Add To Cart" data-form="">
+        <div class="sqs-add-to-cart-button-inner">Add To Cart</div>
+    </div>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIKE Tennis Camp Form</title>
+</head>
+<body>
+
+<h2>NIKE Tennis Camps at Bradfield College - 6 Nights</h2>
+<form action="/submit" method="POST">
+
+    <!-- Camp Option (Radio) -->
+    <label for="campOption">Camp Option:</label><br>
+    <input type="radio" id="campOption1" name="campOption" value="Total Tennis (ages 10 - 17)" required>
+    <label for="campOption1">Total Tennis (ages 10 - 17)</label><br>
+    <input type="radio" id="campOption2" name="campOption" value="Tennis and English (ages 10 - 17)">
+    <label for="campOption2">Tennis and English (ages 10 - 17)</label><br><br>
+
+    <!-- Camp Dates (Select) -->
+    <label for="campDates">Camp Dates:</label>
+    <select id="campDates" name="campDates" required>
+        <option value="">Please select</option>
+        <option value="30 June - 6 July">30 June - 6 July</option>
+        <option value="7 July - 13 July">7 July - 13 July</option>
+        <option value="14 July - 20 July">14 July - 20 July</option>
+        <option value="21 July – 27 July">21 July – 27 July</option>
+    </select><br><br>
+
+    <!-- Booker Title (Select) -->
+    <label for="bookerTitle">Booker Title:</label>
+    <select id="bookerTitle" name="bookerTitle" required>
+        <option value="">Please select</option>
+        <option value="Mr">Mr</option>
+        <option value="Mrs">Mrs</option>
+        <option value="Miss">Miss</option>
+        <option value="Ms">Ms</option>
+        <option value="Dr">Dr</option>
+        <option value="Other">Other</option>
+    </select><br><br>
+
+    <!-- Booker First Name (Text) -->
+    <label for="bookerFirstName">Booker First Name:</label>
+    <input type="text" id="bookerFirstName" name="bookerFirstName" required><br><br>
+
+    <!-- Booker Last Name (Text) -->
+    <label for="bookerLastName">Booker Last Name:</label>
+    <input type="text" id="bookerLastName" name="bookerLastName" required><br><br>
+
+    <!-- Booker Email (Email) -->
+    <label for="bookerEmail">Booker Email:</label>
+    <input type="email" id="bookerEmail" name="bookerEmail" required><br><br>
+
+    <!-- Booker Telephone Number (Text) -->
+    <label for="bookerTelephone">Booker Telephone Number:</label>
+    <input type="text" id="bookerTelephone" name="bookerTelephone" placeholder="e.g. 0044 203 889 6236" required><br><br>
+
+    <!-- Booker Alternative Telephone Number (Text) -->
+    <label for="bookerAltTelephone">Booker Alternative Telephone Number:</label>
+    <input type="text" id="bookerAltTelephone" name="bookerAltTelephone" placeholder="e.g. 0044 203 889 6236"><br><br>
+
+    <!-- Relationship to Player (Text) -->
+    <label for="relationship">Relationship to Player:</label>
+    <input type="text" id="relationship" name="relationship" placeholder="Parent, Guardian, Other (Please Specify)" required><br><br>
+
+    <!-- Country of Residence (Select) -->
+    <label for="countryResidence">Country of Residence:</label>
+    <select id="countryResidence" name="countryResidence" required>
+        <option value="">Please select</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Afghanistan">Afghanistan</option>
+        <option value="Albania">Albania</option>
+        <option value="Algeria">Algeria</option>
+        <option value="Andorra">Andorra</option>
+        <option value="Angola">Angola</option>
+        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+        <option value="Argentina">Argentina</option>
+        <!-- Add more options as needed -->
+    </select><br><br>
+
+    <!-- Submit Button -->
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
+
+</body>
+</html>
