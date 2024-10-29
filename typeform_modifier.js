@@ -44,7 +44,7 @@ $(document).ready(function() {
                                     <button type="button" class="btn btn-primary" id="nextStep">Next Step</button>
                                 </form>
                                 -->
-                                <form data-form-id="6720e5f123ac0105f65213d5" data-success-redirect="" data-dynamic-strings="" autocomplete="on">
+                                <form target="_blank" data-form-id="6720e5f123ac0105f65213d5" method="post" action="https://www.eurosportscamps.com/api/rest/forms/validate/6720e5f123ac0105f65213d5?crumb=BQTeWoi2ddQ0ZjE0YjYxN2FjYjliM2NmY2E0ZmYwM2IzNDM3Njc3" data-success-redirect="" data-dynamic-strings="" autocomplete="on">
       
         <div class="field-list clear">
           
