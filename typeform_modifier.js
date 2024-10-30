@@ -11,7 +11,7 @@ $(document).ready(function() {
     function initNewForm() {
         if ($('#dynamicPopup').length === 0) {
             $('body').append(`
-                <div class="modal fade" id="dynamicPopup" tabindex="-1" role="dialog" aria-labelledby="dynamicPopupLabel" aria-hidden="true" style="display: none;">
+                <div class="modal fade" id="dynamicPopup"  tabindex="-1" role="dialog" aria-labelledby="dynamicPopupLabel" aria-hidden="true" style="display: none;z-index: 1050;">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -42,6 +42,10 @@ $(document).ready(function() {
                                     </div>
                                     <button type="button" class="btn btn-primary" id="nextStep">Next Step</button>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                                 
             `);
             document.getElementById("nextStep").addEventListener("click", function() {
