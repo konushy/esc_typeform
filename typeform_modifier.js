@@ -5,7 +5,7 @@ $(document).ready(function() {
     $('.sqs-add-to-cart-button-inner').on('click', function(event) {
         //event.preventDefault();
         //event.stopPropagation();
-        initNewForm();
+        //initNewForm();
     });
 
     function initNewForm() {
