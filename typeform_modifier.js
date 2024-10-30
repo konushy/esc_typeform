@@ -44,6 +44,17 @@ $(document).ready(function() {
                                 </form>
                                 
             `);
+            document.getElementById("nextStep").addEventListener("click", function() {
+                // Получаем значения из полей первой формы
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const description = document.getElementById("description").value;
+
+                // Устанавливаем значения во вторую форму
+                document.getElementById("text-yui_3_17_2_1_1730209060327_10375-field").value = name;
+                document.getElementById("email-yui_3_17_2_1_1730209060327_11077-field").value = email;
+                document.getElementById("textarea-yui_3_17_2_1_1730209060327_11816-field").value = description;
+            });
         }
 
         $('#dynamicPopup').css('display', 'block').addClass('show');
