@@ -3,8 +3,8 @@ $(document).ready(function() {
     const randomValue = Math.random().toString(36).substring(2, 15);
 
     $('.sqs-add-to-cart-button-inner').on('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
+        //event.preventDefault();
+        //event.stopPropagation();
         initNewForm();
     });
 
@@ -21,7 +21,6 @@ $(document).ready(function() {
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <!--
                                 <form id="stepForm">
                                     <div id="step1">
                                         <div class="form-group">
@@ -43,65 +42,7 @@ $(document).ready(function() {
                                     </div>
                                     <button type="button" class="btn btn-primary" id="nextStep">Next Step</button>
                                 </form>
-                                -->
-                                <form target="_blank" data-form-id="6720e5f123ac0105f65213d5" method="post" action="https://www.eurosportscamps.com/api/rest/forms/validate/6720e5f123ac0105f65213d5?crumb=BQTeWoi2ddQ0ZjE0YjYxN2FjYjliM2NmY2E0ZmYwM2IzNDM3Njc3" data-success-redirect="" data-dynamic-strings="" autocomplete="on">
-      
-        <div class="field-list clear">
-          
-              <div id="text-yui_3_17_2_1_1730209060327_10375" class="form-item field text required">
-                
-            <label class="title" for="text-yui_3_17_2_1_1730209060327_10375-field">
-              Name
-              
-                <span class="required" aria-hidden="true">*</span>
-              
-            </label>
-          
-                
-                <input class="field-element text" type="text" id="text-yui_3_17_2_1_1730209060327_10375-field" aria-required="true">
-              </div>
-  
-            
-              <div id="email-yui_3_17_2_1_1730209060327_11077" class="form-item field email required">
-                
-            <label class="title" for="email-yui_3_17_2_1_1730209060327_11077-field">
-              Email
-              
-                <span class="required" aria-hidden="true">*</span>
-              
-            </label>
-          
-                
-                <input class="field-element" id="email-yui_3_17_2_1_1730209060327_11077-field" name="email" type="email" autocomplete="email" spellcheck="false" aria-required="true">
-              </div>
-            
-              <div id="textarea-yui_3_17_2_1_1730209060327_11816" class="form-item field textarea required">
-                
-            <label class="title" for="textarea-yui_3_17_2_1_1730209060327_11816-field">
-              Description
-              
-                <span class="required" aria-hidden="true">*</span>
-              
-            </label>
-          
-                
-                <textarea class="field-element " id="textarea-yui_3_17_2_1_1730209060327_11816-field" aria-required="true"></textarea>
-              </div>
-
-        </div>      
-      <div data-animation-role="button" class="
-          form-button-wrapper
-          
-        ">
-        <input class="button sqs-system-button sqs-editable-button sqs-button-element--primary" type="submit" value="Add To Cart">
-      </div>
-      <div class="hidden form-submission-text"></div>
-      <div class="hidden form-submission-html" data-submission-html=""></div>
-    </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                
             `);
         }
 
